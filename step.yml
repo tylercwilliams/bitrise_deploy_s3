@@ -1,4 +1,4 @@
-title: "STEP TEMPLATE"
+title: "Copy Deploy to Private S3 Bucket"
 summary: A short summary of the step. Don't make it too long ;)
 description: |-
   This is a Step template.
@@ -23,36 +23,50 @@ project_type_tags:
   - android
   - xamarin
 type_tags:
-  - script
+  - deploy
+  - upload
+  - amazon 
 is_requires_admin_user: true
 is_always_run: false
 is_skippable: false
 deps:
-  brew:
-  - name: git
-  - name: wget
-  apt_get:
-  - name: git
-  - name: wget
+  - name: awscli 
 run_if: ""
 inputs:
-  - example_step_input: Default Value - you can leave this empty if you want to
+  - local_folder: ""
     opts:
-      title: "Example Step Input"
-      summary: Summary. No more than 2-3 sentences.
-      description: |
-        Description of this input.
-
-        Can be Markdown formatted text.
-      is_expand: true
+      title: "Local folder"
+      summary: ""
+      description: "The folder that you wish to have copied into aws"
       is_required: true
-      value_options: []
-outputs:
-  - EXAMPLE_STEP_OUTPUT:
+  - aws_access_key: ""
     opts:
-      title: "Example Step Output"
-      summary: Summary. No more than 2-3 sentences.
-      description: |
-        Description of this output.
+      title: "AWS Access Key"
+      summary: "" 
+      description: ""
+      is_required: true
+  - aws_secret_key:
+    opts:
+      title: "AWS Secret Key"
+      summary: ""
+      description: ""
+      is_required: true
+  - s3_bucket:
+    opts:
+      title: "Aws S3 Bucket"
+      summary: ""
+      description: "s3://bucket-name"
+      is_required: true
+  - s3_folder_tag:
+    opts: 
+      title: "S3 Folder"
+      summary: "Name of the folder in the s3 bucket you want to deploy to"
+      description: ""
+      is_required: false
+outputs:
+  - S3_DEPLOY_BUCKET:
+    opts:
+      title: ""
+      summary: "" 
+      description: "The slug for the s3 bucket (and folder) deployed to" 
 
-        Can be Markdown formatted text.

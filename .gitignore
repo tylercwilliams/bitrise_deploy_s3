@@ -1,1 +1,3 @@
 .bitrise*
+*.swp
+_tmp

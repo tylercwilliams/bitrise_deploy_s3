@@ -1,7 +1,5 @@
 #!/bin/bash
 
-echo "This is the value specified for the input 'example_step_input': ${example_step_input}"
-
 #
 # --- Export Environment Variables for other Steps:
 # You can export Environment Variables for other Steps with
@@ -19,3 +17,14 @@ echo "This is the value specified for the input 'example_step_input': ${example_
 # The exit code of your Step is very important. If you return
 #  with a 0 exit code `bitrise` will register your Step as "successful".
 # Any non zero exit code will be registered as "failed" by `bitrise`.
+
+
+export AWS_ACCESS_KEY="${aws_access_key}"
+export AWS_SECRET_ACCESS_KEY="${aws_secret_key}"
+
+echo "$ aws s3 cp ${local_folder} ${s3_bucket} --recursive --exclude '*' --include '*.apk'"
+aws s3 cp ${local_folder} ${s3_bucket}/${s3_folder_tag} --recursive --exclude "*" --include "*.apk"
+
+envman add --key S3_DOWNLOAD_FOLDER --value '${s3_bucket}/${s3_folder_tag}'
+
+exit 0
